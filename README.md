@@ -1,7 +1,7 @@
 # nessus-ssl-parser
 A quick ruby script for parsing SSL/TLS issues from Nessus files.
 
-Usage: 
+Usage:
   nessus_ssl_parser.rb [options] nessus_file_location
   -h, --help       Show this help.
   -v, --version    Show the version number.
