@@ -86,6 +86,7 @@ if ARGS[:ip]
 			  				end
 			  				if !ip_list[[a,1]].include? thing.at_xpath('plugin_name').content 
 			  					ip_list[[a,1]] = "#{ip_list[[a,1]]}" + "  * #{thing.at_xpath('plugin_name').content}\n"
+			  					#Add verbose functionality here
 			  				end
 			  			end
 			  		end
@@ -133,16 +134,20 @@ if ARGS[:issue]
 		  			issue_list.each_with_index do |value, key|
 			  			if value.include?(issue.at_xpath('plugin_name').content) and !value.include?(host)
 			  				issue_list[key] = "#{issue_list[key]}\n  * #{host}" 
-			  				if issue.at_xpath('plugin_output')
-			  					hold = issue.at_xpath('plugin_output').content
-			  					hold = hold.split(" ")
-				  				hold.each_with_index do |value1, key1|
-				  					value1 = value1.to_s
-				  					if value1.include?("-") and value1.length > 1 and !value1.include?("Orga") and !value1.include?("Country") and !value1.include?("Vali") and !value1.include?("bit") and !value1.include?("Sub") and !value1.include?("Issu") and !value1.include?("Sig") and !value1.include?("=") and !value1.include?("Comm")
-				  						issue_list[key] = "#{issue_list[key]}\n   * #{value1}"
-				  					end
-				  				end
-				  			end
+			  				############################################################## Verbose Functionality
+				  			if ARGS[:verbose]	
+				  				if issue.at_xpath('plugin_output')
+				  					hold = issue.at_xpath('plugin_output').content
+				  					hold = hold.split(" ")
+					  				hold.each_with_index do |value1, key1|
+					  					value1 = value1.to_s
+					  					if value1.include?("-") and value1.length > 1 and !value1.include?("Orga") and !value1.include?("Country") and !value1.include?("Vali") and !value1.include?("bit") and !value1.include?("Sub") and !value1.include?("Issu") and !value1.include?("Sig") and !value1.include?("=") and !value1.include?("Comm")
+					  						issue_list[key] = "#{issue_list[key]}\n   * #{value1}"
+					  					end
+					  				end
+					  			end
+					  		end
+			  				############################################################## Verbose Functionality
 			  			end
 			  		end
 	  			end
